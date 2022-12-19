@@ -6,9 +6,9 @@ import ProductSearch from './components/ProductSearch';
 function App() {
   return (
     <div>
-      <ProductForm />
+      {/* <ProductForm /> */}
       <ProductList />
-      <ProductSearch />
+      {/* <ProductSearch /> */}
     </div>
   );
 }
