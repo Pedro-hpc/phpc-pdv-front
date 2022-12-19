@@ -1,10 +1,14 @@
-import React from 'react';
-import './App.css';
+import React from 'react';    
+import ProductForm from './components/ProductForm';
+import ProductList from './components/ProductList';
+import ProductSearch from './components/ProductSearch';
 
 function App() {
   return (
     <div>
-      pedro
+      <ProductForm />
+      <ProductList />
+      <ProductSearch />
     </div>
   );
 }
