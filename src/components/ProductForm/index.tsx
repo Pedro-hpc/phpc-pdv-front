@@ -1,35 +1,50 @@
 import { useState } from "react"
 import styles from "./styles.module.scss"
+import {v4 as uuid} from "uuid"
+import { Product } from "../../models/product";
 
-export default function ProductForm() {
+interface ProductFormProps {
+    onSave: (product: Product) => void
+}
+
+export default function ProductForm(props: ProductFormProps) {
 
     const [barcode, setBarcode] = useState<string>();
     const [description, setDescription] = useState<string>();
-    const [price, setPrice] = useState<string>()
-    const [image, setImage] = useState<string>()    
+    const [price, setPrice] = useState<number>()
+    const [image, setImage] = useState<string>() 
+    
+    function save(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        event.preventDefault()
+        const newProduct: Product = {
+            id: uuid(),
+            barcode: barcode!,
+            description: description!,
+            price: price!,
+            image:image!
+        }
+        props.onSave(newProduct)
+    }
 
     return (
         <form action="">
             <div>
                 <label>Cód Barras:</label>
-                <input value={barcode} onChange={event => setBarcode(event.target.value)} type="number" />
+                <input required value={barcode} onChange={event => setBarcode(event.target.value)} type="number" />
             </div>
             <div>
                 <label>Descrição:</label>
-                <input value={description} onChange={event => setDescription(event.target.value)} type="text" />
+                <input required value={description} onChange={event => setDescription(event.target.value)} type="text" />
             </div>
             <div>
                 <label>Preço:</label>
-                <input value={price} onChange={event => setPrice(event.target.value)} type="number"/>
+                <input required value={price} onChange={event => setPrice(Number(event.target.value))} type="number"/>
             </div>
             <div>
                 <label>URL Imagem:</label>
-                <input value={image} onChange={event => setImage(event.target.value)} type="text"/>
+                <input required value={image} onChange={event => setImage(event.target.value)} type="text"/>
             </div>
-            <input type="submit" value="Enviar" />
-            <div>
-                {barcode},{description},{price},{image}
-            </div>
+            <button onClick={e => save(e)}>Enviar</button>
         </form>
     )
 }

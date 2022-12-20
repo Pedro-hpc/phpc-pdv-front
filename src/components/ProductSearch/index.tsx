@@ -1,7 +1,15 @@
+import { useState } from "react"
+
 export default function ProductSearch() {
+
+    const [register, setRegister] = useState<string>()
+
     return (
         <div>
-            ProductSearch
+            <input value={register} onChange={event => setRegister(event.target.value)} type="text" />
+                    {register}
+                    <input type="submit" value="Enviar" />
         </div>
     )
 }
+
